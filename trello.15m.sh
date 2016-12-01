@@ -25,7 +25,7 @@ unreadColor="blue"  # Unread notification color (Color names or HEX values can b
 unreadFont=""       # Unread notification font
 unreadSize="15"     # Unread notification font size
 
-truncLength=""    # Number of characters before the notification text is truncated (Set to blank to disable truncating)
+truncLength="70"    # Number of characters before the notification text is truncated (Set to blank to disable truncating)
 truncSuffix="..."   # Text to use after truncating
 
 useIcons="1"  # Whether emoji icons should be displayed next to notifications or not (0=no, 1=yes)
@@ -262,7 +262,7 @@ if [ "$error" == false ]; then
   x=0
 
   # No notifications were found
-  if [[ "${#ids[@]}" -lt 1 ]]; then echo ":see_no_evil: no notifications found"; fi
+  if [[ "${#ids[@]}" -lt 1 ]]; then echo "🙈 no notifications found"; fi
 
   for i in "${ids[@]}"; do
     # Get the data for this notification
