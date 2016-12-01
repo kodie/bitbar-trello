@@ -41,137 +41,137 @@ icon="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAABYlAAAWJQFJUiTwAA
 # nType_[$notificationType] - Notification type. Probably shouldn't ever be changed. (c=card, b=board, o=organization)
 
 # An attachment was added to a card
-nIcon_addedAttachmentToCard="paperclip"
+nIcon_addedAttachmentToCard="📎"
 nText_addedAttachmentToCard="%name% added an attachment to card %card%"
 nType_addedAttachmentToCard="c"
 
 # The current member was added to a board
-nIcon_addedToBoard="clipboard"
+nIcon_addedToBoard="📋"
 nText_addedToBoard="%name% added you to the board %board%"
 nType_addedToBoard="b"
 
 # The current member was added to a card
-nIcon_addedToCard="green_book"
+nIcon_addedToCard="📗"
 nText_addedToCard="%name% added you to the card %card%"
 nType_addedToCard="c"
 
 # The current member was added to an organization
-nIcon_addedToOrganization="house"
+nIcon_addedToOrganization="🏠"
 nText_addedToOrganization="%name% added you to the organization %organization%"
 nType_addedToOrganization="o"
 
 # Another member was added to a card
-nIcon_addedMemberToCard="green_book"
+nIcon_addedMemberToCard="📗"
 nText_addedMemberToCard="%name% was added to the card %card%"
 nType_addedMemberToCard="c"
 
 # The current member was added to a board as an admin
-nIcon_addAdminToBoard="clipboard"
+nIcon_addAdminToBoard="📋"
 nText_addAdminToBoard="%name% added you as an admin on the board %board%"
 nType_addAdminToBoard="b"
 
 # The current member was added to an organization as an admin
-nIcon_addAdminToOrganization="house"
+nIcon_addAdminToOrganization="🏠"
 nText_addAdminToOrganization="%name% added you as an admin of the organization %organization%"
 nType_addAdminToOrganization="o"
 
 # A card was changed
-nIcon_changeCard="pencil"
+nIcon_changeCard="📝"
 nText_changeCard="%name% updated the card %card%"
 nType_changeCard="c"
 
 # A board was closed
-nIcon_closeBoard="clipboard"
+nIcon_closeBoard="📋"
 nText_closeBoard="%name% closed the board %board%"
 nType_closeBoard="b"
 
 # Another member commented on a card
-nIcon_commentCard="speech_balloon"
+nIcon_commentCard="💬"
 nText_commentCard="%name% commented on the card %card%"
 nType_commentCard="c"
 
 # Another member created a card
-nIcon_createdCard="orange_book"
+nIcon_createdCard="📙"
 nText_createdCard="%name% created the card %card%"
 nType_createdCard="c"
 
 # The current member was invited to a board
-nIcon_invitedToBoard="clipboard"
+nIcon_invitedToBoard="📋"
 nText_invitedToBoard="%name% invited you to the board %board%"
 nType_invitedToBoard="b"
 
 # The current member was invited to an organization
-nIcon_invitedToOrganization="house"
+nIcon_invitedToOrganization="🏠"
 nText_invitedToOrganization="%name% invited you to the organization %organization%"
 nType_invitedToOrganization="o"
 
 # The current member was removed from a board
-nIcon_removedFromBoard="clipboard"
+nIcon_removedFromBoard="📋"
 nText_removedFromBoard="%name% removed you from the board %board%"
 nType_removedFromBoard="b"
 
 # The current member was removed from a card
-nIcon_removedFromCard="closed_book"
+nIcon_removedFromCard="📕"
 nText_removedFromCard="%name% removed you from the card %card%"
 nType_removedFromCard="c"
 
 # Another member was removed from a card
-nIcon_removedMemberFromCard="closed_book"
+nIcon_removedMemberFromCard="📕"
 nText_removedMemberFromCard="%name% was removed from the card %card%"
 nType_removedMemberFromCard="c"
 
 # The current member was removed from an organization
-nIcon_removedFromOrganization="house"
+nIcon_removedFromOrganization="🏠"
 nText_removedFromOrganization="%name% removed you from the organization %organization%"
 nType_removedFromOrganization="o"
 
 # The current member was mentioned on a card
-nIcon_mentionedOnCard="bell"
+nIcon_mentionedOnCard="🔔"
 nText_mentionedOnCard="%name% mentioned you on the card %card%"
 nType_mentionedOnCard="c"
 
 # ???
-nIcon_unconfirmedInvitedToBoard="gray_question"
+nIcon_unconfirmedInvitedToBoard="❔"
 nText_unconfirmedInvitedToBoard="%name% unconfirmedInvitedToBoard %board%"
 nType_unconfirmedInvitedToBoard="b"
 
 # ???
-nIcon_unconfirmedInvitedToOrganization="gray_question"
+nIcon_unconfirmedInvitedToOrganization="❔"
 nText_unconfirmedInvitedToOrganization="%name% unconfirmedInvitedToOrganization %organization%"
 nType_unconfirmedInvitedToOrganization="o"
 
 # A checklist item on a card was updated
-nIcon_updateCheckItemStateOnCard="white_check_mark"
+nIcon_updateCheckItemStateOnCard="✅"
 nText_updateCheckItemStateOnCard="%name% updated a checklist on the card %card%"
 nType_updateCheckItemStateOnCard="c"
 
 # The current member was made an admin of a board
-nIcon_makeAdminOfBoard="clipboard"
+nIcon_makeAdminOfBoard="📋"
 nText_makeAdminOfBoard="%name% made you an admin on the board %board%"
 nType_makeAdminOfBoard="b"
 
 # The current member was made an admin of an organization
-nIcon_makeAdminOfOrganization="house"
+nIcon_makeAdminOfOrganization="🏠"
 nText_makeAdminOfOrganization="%name% made you an admin of the organization %organization%"
 nType_makeAdminOfOrganization="o"
 
 # A card's due date is approaching
-nIcon_cardDueSoon="clock4"
+nIcon_cardDueSoon="🕓"
 nText_cardDueSoon="The card %card% is due soon"
 nType_cardDueSoon="c"
 
 # Another member declined the current member's invitation to a board
-nIcon_declinedInvitationToBoard="clipboard"
+nIcon_declinedInvitationToBoard="📋"
 nText_declinedInvitationToBoard="%name% declined your invite to the board %board%"
 nType_declinedInvitationToBoard="b"
 
 # Another member declined the current member's invitation to an organization
-nIcon_declinedInvitationToOrganization="house"
+nIcon_declinedInvitationToOrganization="🏠"
 nText_declinedInvitationToOrganization="%name% declined your invite to the organization %organization%"
 nType_declinedInvitationToOrganization="o"
 
 # Another member joined Trello because of the current member's recommendation
-nIcon_memberJoinedTrello="wave"
+nIcon_memberJoinedTrello="👋"
 nText_memberJoinedTrello="%name% joined Trello on your recommendation"
 nType_memberJoinedTrello="o"
 
@@ -320,7 +320,7 @@ if [ "$error" == false ]; then
     if [ "$size" ]; then itemProperties="$itemProperties size="$size; fi
 
     # Add colons and a space to icon if there is one
-    if [ "$itemIcon" ]; then itemIcon=":$itemIcon: "; fi
+    if [ "$itemIcon" ]; then itemIcon="$itemIcon "; fi
 
     # Print it
     echo "$itemIcon$itemText | $itemProperties"
