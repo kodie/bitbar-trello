@@ -209,6 +209,9 @@ else
   if [ ! "$response" ]; then response="no response"; fi
 fi
 
+# Set the title to "Trello" if we're running it BitBar and both the title and icon have been set to blank
+if [[ "${BitBar}" && ! "$title" && ! "$icon" ]]; then title="Trello"; fi
+
 # If there's no errors, get the unread notification count
 if [[ ! "$unreadDisplay" == "0" && "$error" == false ]]; then
   unread=($(echo "$response" | jq -c '.[].unread | select(.==true)'))
@@ -220,16 +223,23 @@ if [[ ! "$unreadDisplay" == "0" && "$error" == false ]]; then
   fi
 fi
 
-# Set the icon if there is one
-if [ "$icon" ]; then icon="templateImage="$icon; fi
+# BitBar title formatting
+if [ "${BitBar}" ]; then
+  # Set title properties
+  titleProperties=" | dropdown=false"
+
+  # Set the icon if there is one
+  if [ "$icon" ]; then titleProperties="$titleProperties templateImage="$icon; fi
+fi
 
 # Our first echo
-echo "$title | dropdown=false $icon"
+titleEcho="$title$titleProperties"
+if [ "$titleEcho" ]; then echo "$titleEcho"; fi
 
 # Show an exclamation icon in the case of an error, or
 # display unread count if unreadDisplay is set to 2 or 3
 if [ "$error" == true ]; then
-  echo ":exclamation: | dropdown=false";
+  if [ "${BitBar}" ]; then echo "⁉️ | dropdown=false"; fi
 elif [[ "$unread" -gt 0 ]]; then
   if [ "$unreadDisplay" == "2" ]; then
     echo "$unreadEcho"
@@ -239,10 +249,10 @@ elif [[ "$unread" -gt 0 ]]; then
   fi
 fi
 
-echo "---"
+if [ "$titleEcho" ]; then echo "---"; fi
 
 # Echo the error in the drop-down
-if [ "$error" == true ]; then echo ":exclamation: $response"; fi
+if [ "$error" == true ]; then echo "⁉️ $response"; fi
 
 # If there's no errors, let's loop through the notifications
 if [ "$error" == false ]; then
@@ -300,30 +310,33 @@ if [ "$error" == false ]; then
       itemText="${itemText//%name%/$memberName}"
     fi
 
-    # Item properties
-    itemProperties="href="$itemLink
+    # Only set item properties if we're in BitBar
+    if [ "${BitBar}" ]; then
+      # Item properties
+      itemProperties=" | href="$itemLink
 
-    # Colors and fonts
-    itemUnreadStatus=$(echo "$this" | jq -r '.unread')
-    if [ "$itemUnreadStatus" == true ]; then
-      color=$unreadColor
-      font=$unreadFont
-      size=$unreadSize
-    else
-      color=$readColor
-      font=$readFont
-      size=$readSize
+      # Colors and fonts
+      itemUnreadStatus=$(echo "$this" | jq -r '.unread')
+      if [ "$itemUnreadStatus" == true ]; then
+        color=$unreadColor
+        font=$unreadFont
+        size=$unreadSize
+      else
+        color=$readColor
+        font=$readFont
+        size=$readSize
+      fi
+
+      if [ "$color" ]; then itemProperties="$itemProperties color="$color; fi
+      if [ "$font" ]; then itemProperties="$itemProperties font="$font; fi
+      if [ "$size" ]; then itemProperties="$itemProperties size="$size; fi
     fi
 
-    if [ "$color" ]; then itemProperties="$itemProperties color="$color; fi
-    if [ "$font" ]; then itemProperties="$itemProperties font="$font; fi
-    if [ "$size" ]; then itemProperties="$itemProperties size="$size; fi
-
-    # Add colons and a space to icon if there is one
+    # Add a space after icon if there is one
     if [ "$itemIcon" ]; then itemIcon="$itemIcon "; fi
 
     # Print it
-    echo "$itemIcon$itemText | $itemProperties"
+    echo "$itemIcon$itemText$itemProperties"
 
     # Break out if we hit our limit
     if (($x == (($limit - 1)))); then break; fi
