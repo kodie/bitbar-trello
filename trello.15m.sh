@@ -1,4 +1,7 @@
 #!/bin/bash
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
+# shellcheck source=/dev/null
 
 # <bitbar.title>Trello Notifications</bitbar.title>
 # <bitbar.version>1.0.1</bitbar.version>
@@ -8,10 +11,6 @@
 # <bitbar.image>https://raw.githubusercontent.com/kodie/bitbar-trello/master/screenshot.png</bitbar.image>
 # <bitbar.dependencies>jq</bitbar.dependencies>
 # <bitbar.abouturl>https://github.com/kodie/bitbar-trello</bitbar.abouturl>
-
-# shellcheck disable=SC2034
-# shellcheck disable=SC2154
-# shellcheck source=/dev/null
 
 ### Note: The below variables can be overwritten by setting them in the ~/.bitbar_trello file
 
