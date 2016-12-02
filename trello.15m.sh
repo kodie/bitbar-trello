@@ -197,7 +197,7 @@ createConfigFile="1"              # Create the config file if one is not found (
 if [ -e "$configFile" ];
   then . "$configFile"
 elif [ "$createConfigFile" == "1" ]; then
-  printf "# To get your Trello API Key and Token, go to https://trello.com/app-key\napiKey=\"%s\"\napiToken=\"%s\"" "$apiKey" "$apiToken" > $configFile
+  printf "# To get your Trello API Key and Token, go to https://trello.com/app-key\napiKey=\"%s\"\napiToken=\"%s\"" "$apiKey" "$apiToken" > "$configFile"
 fi
 
 # Export PATH
@@ -246,7 +246,7 @@ if [ "$titleEcho" ]; then echo "$titleEcho"; fi
 # display unread count if unreadDisplay is set to 2 or 3
 if [ "$error" == true ]; then
   if [ "${BitBar}" ]; then echo "⁉️ | dropdown=false"; fi
-elif [[ "$unread" -gt 0 ]]; then
+elif [[ "$unreadCount" -gt 0 ]]; then
   if [ "$unreadDisplay" == "2" ]; then
     echo "$unreadEcho"
   elif [ "$unreadDisplay" == "3" ]; then
@@ -352,7 +352,7 @@ if [ "$error" == false ]; then
     echo "$itemIcon$itemText$itemProperties"
 
     # Break out if we hit our limit
-    if (($x == $limit - 1)); then break; fi
+    if [[ $x == $((limit-1)) ]]; then break; fi
 
     # Increment x
     ((x+=1))
