@@ -1,6 +1,8 @@
 # BitBar Trello Plugin [![Build Status](https://travis-ci.org/kodie/bitbar-trello.svg?branch=master)](https://travis-ci.org/kodie/bitbar-trello)
 A plugin for [BitBar](https://github.com/matryer/bitbar) that shows your unread [Trello](https://trello.com) notification count with a drop-down list of clickable recent notifications.
 
+![](/screenshot.png?raw=true)
+
 ## Requirements
 * [jq](https://github.com/stedolan/jq)
 
