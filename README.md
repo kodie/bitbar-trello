@@ -7,7 +7,7 @@ A plugin for [BitBar](https://github.com/matryer/bitbar) that shows your unread 
 * [jq](https://github.com/stedolan/jq)
 
 ## Setup
-1. Install BitBar Trello Plugin: ```bitbar://openPlugin?title=Trello%20Notifications&src=https://raw.githubusercontent.com/kodie/bitbar-trello/master/trello.15m.sh```
+1. Install BitBar Trello Plugin: ```bitbar://openPlugin?title=Trello&src=https://raw.githubusercontent.com/kodie/bitbar-trello/master/trello.15m.sh```
 2. After the plugin is installed, it will automatically create the config file `~/.bitbar_trello`. You will need to fill out the `apiKey` and `apiToken` variables which we will be doing in the following steps.
 3. Go to https://trello.com/app-key
 4. The text under `Key:` is your API Key. Put it in the `apiKey` variable in your config file.
