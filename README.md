@@ -5,14 +5,22 @@ A plugin for [BitBar](https://github.com/matryer/bitbar) that shows your unread 
 * [jq](https://github.com/stedolan/jq)
 
 ## Setup
-1. [Install BitBar Trello Plugin](bitbar://openPlugin?title=Trello%20Notifications&src=https://raw.githubusercontent.com/kodie/bitbar-trello/master/trello.15m.sh)
+1. Install BitBar Trello Plugin by opening this link in your browser:
+```
+bitbar://openPlugin?title=Trello%20Notifications&src=https://raw.githubusercontent.com/kodie/bitbar-trello/master/trello.15m.sh
+```
 2. After the plugin is installed, it will automatically create the config file `~/.bitbar_trello`. You will need to fill out the `apiKey` and `apiToken` variables which we will be doing in the following steps.
 3. Go to https://trello.com/app-key
 4. The text under `Key:` is your API Key. Put it in the `apiKey` variable in your config file.
 5. On that same page, click on the `Token` link.
 6. You should be asked to "Let Server Token use your account?". Click the `Allow` button.
 7. Your API Token should then be displayed. Put it in the `apiToken` variable in your config file.
-8. [Refresh BitBar Trello Plugin](bitbar://refreshPlugin?name=trello.*?.sh)
+8. Refresh BitBar Trello Plugin by opening this link in your browser:
+```
+bitbar://refreshPlugin?name=trello.*?.sh
+```
+
+and that's it!
 
 ## Configurable Variables
 When you first install the BitBar Trello Plugin, it will automatically create the config file `~/.bitbar_trello`. This file is where you put your API Key and Token, however there are additional variables that you can set in there to change the way the plugin looks and functions.
