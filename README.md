@@ -14,8 +14,6 @@ A plugin for [BitBar](https://github.com/matryer/bitbar) that shows your unread 
 7. Your API Token should then be displayed. Put it in the `apiToken` variable in your config file.
 8. Refresh BitBar Trello Plugin: ```bitbar://refreshPlugin?name=trello.*?.sh```
 
-and that's it!
-
 ## Configurable Variables
 When you first install the BitBar Trello Plugin, it will automatically create the config file `~/.bitbar_trello`. This file is where you put your API Key and Token, however there are additional variables that you can set in there to change the way the plugin looks and functions.
 
