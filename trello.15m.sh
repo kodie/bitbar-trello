@@ -1,5 +1,6 @@
 #!/bin/bash
 # shellcheck disable=SC2034
+# shellcheck source=/dev/null
 
 # <bitbar.title>Trello Notifications</bitbar.title>
 # <bitbar.version>1.0.1</bitbar.version>
