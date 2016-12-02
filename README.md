@@ -93,8 +93,8 @@ When you first install the BitBar Trello Plugin, it will automatically create th
 * `title` - Text to be displayed on system bar
 	* Default: `""`
 	* Example: `title="Trello"`
-	* Can be set to blank to display icon only.
-	* If both `title` and `icon` are set to blank, `title` will automatically be set to "Trello.
+	* Can be set to blank to display icon only
+	* If both `title` and `icon` are set to blank, `title` will automatically be set to "Trello".
 
 * `icon` - Base64 icon to use in system bar
 	* Default: (The Trello logo in Base64)
