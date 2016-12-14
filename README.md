@@ -88,7 +88,7 @@ When you first install the BitBar Trello Plugin, it will automatically create th
 	* 0=none, 1=beside icon/title, 2=rotated with icon/title, 3=in dropdown
 
 * `unreadEcho` - Unread count text
-	* Default: `"(%unread%)"`
+	* Default: `"%unread%"`
 	* Example: `unreadEcho="Unread: %unread%"`
 	* `%unread%` will be replaced with unread count number
 
