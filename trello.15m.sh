@@ -382,4 +382,5 @@ if [ "${BitBar}" ]; then
   echo "--by Kodie Grantham | href=http://kodieg.com"
   echo "-----"
   echo "--GitHub Page | href=https://github.com/kodie/bitbar-trello"
+  echo "--Changelog | href=https://github.com/kodie/bitbar-trello/blob/master/CHANGELOG.md"
 fi
