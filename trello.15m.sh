@@ -47,9 +47,9 @@ icon="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAABYlAAAWJQFJUiTwAA
 # nType_[$notificationType] - Notification type. Probably shouldn't ever be changed. (c=card, b=board, o=organization)
 
 # An attachment was added to a card
-nIcon_addedAttachmentToCard="📎"
-nText_addedAttachmentToCard="%name% added an attachment to card %card%"
-nType_addedAttachmentToCard="c"
+nIcon_addAttachmentToCard="📎"
+nText_addAttachmentToCard="%name% added an attachment to card %card%"
+nType_addAttachmentToCard="c"
 
 # The current member was added to a board
 nIcon_addedToBoard="📋"
