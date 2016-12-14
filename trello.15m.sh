@@ -4,13 +4,15 @@
 # shellcheck source=/dev/null
 
 # <bitbar.title>Trello</bitbar.title>
-# <bitbar.version>1.0.1</bitbar.version>
+# <bitbar.version>1.0.2</bitbar.version>
 # <bitbar.author>Kodie Grantham</bitbar.author>
 # <bitbar.author.github>kodie</bitbar.author.github>
 # <bitbar.desc>Shows unread Trello notification count with a drop-down list of clickable recent notifications</bitbar.desc>
 # <bitbar.image>https://raw.githubusercontent.com/kodie/bitbar-trello/master/screenshot.png</bitbar.image>
 # <bitbar.dependencies>jq</bitbar.dependencies>
 # <bitbar.abouturl>https://github.com/kodie/bitbar-trello</bitbar.abouturl>
+
+ver="1.0.2"
 
 ### Note: The below variables can be overwritten by setting them in the ~/.bitbar_trello file
 
@@ -362,7 +364,8 @@ if [ "$error" == false ]; then
       ((x+=1))
     done
 
-    if [ "${BitBar}" ]; then
+    # Display "Mark All Notificatins As Read" option if there are any unread notifications
+    if [[ "${BitBar}" && "$unreadCount" -gt 0 ]]; then
       echo "---"
       echo "Mark All Notifications As Read | bash='$0' param1=markRead refresh=true terminal=false"
     fi
@@ -370,4 +373,13 @@ if [ "$error" == false ]; then
     # No notifications were found
     echo "🙈 no notifications found"
   fi
+fi
+
+# Display about menu
+if [ "${BitBar}" ]; then
+  echo "---"
+  echo "BitBar Trello Plugin v$ver"
+  echo "--by Kodie Grantham | href=http://kodieg.com"
+  echo "-----"
+  echo "--GitHub Page | href=https://github.com/kodie/bitbar-trello"
 fi
