@@ -34,7 +34,7 @@ truncSuffix="..."   # Text to use after truncating
 useIcons="1"  # Whether emoji icons should be displayed next to notifications or not (0=no, 1=yes)
 
 unreadDisplay="1"       # Unread display mode (0=none, 1=beside icon/title, 2=rotated with icon/title, 3=in dropdown)
-unreadEcho="(%unread%)" # Unread count text (%unread% will be replaced with unread count number)
+unreadEcho="%unread%"   # Unread count text (%unread% will be replaced with unread count number)
 
 title=""  # Text to be displayed on system bar (Can be set to blank to display icon only)
 
