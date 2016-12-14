@@ -183,7 +183,7 @@ nType_memberJoinedTrello="o"
 
 ### End of notification settings
 
-apiLink="https://api.trello.com/1/members/me/notifications" # API Link. Probably shouldn't ever be changed.
+apiLink="https://api.trello.com/1" # API Link. Probably shouldn't ever be changed.
 nLink="https://trello.com"                                  # Base for notification links. Probably shouldn't ever be changed.
 
 configFile="$HOME/.bitbar_trello" # Config file path
@@ -203,8 +203,13 @@ fi
 # Export PATH
 export PATH="/usr/local/bin:/usr/bin:$PATH"
 
+# "Mark All Notifications As Read" function
+if [ "$1" == "markRead" ]; then
+  curl -s -X POST "$apiLink/notifications/all/read?key=$apiKey&token=$apiToken"
+fi
+
 # Get response from API
-response=$(curl -s -X GET "$apiLink?key=$apiKey&token=$apiToken&limit=$limit")
+response=$(curl -s -X GET "$apiLink/members/me/notifications?key=$apiKey&token=$apiToken&limit=$limit")
 
 # Check for errors
 if [ "${response:0:1}" == "[" ]; then
@@ -264,97 +269,105 @@ if [ "$error" == true ]; then echo "⁉️ $response"; fi
 if [ "$error" == false ]; then
   x=0
 
-  # No notifications were found
-  if [[ "${#ids[@]}" -lt 1 ]]; then echo "🙈 no notifications found"; fi
+  # Notifications were found
+  if [[ "${#ids[@]}" -gt 0 ]]; then
+    for i in "${ids[@]}"; do
+      # Get the data for this notification
+      this=$(echo "$response" | jq -c '.['$x']')
+      notificationType=$(echo "$this" | jq -r '.type')
 
-  for i in "${ids[@]}"; do
-    # Get the data for this notification
-    this=$(echo "$response" | jq -c '.['$x']')
-    notificationType=$(echo "$this" | jq -r '.type')
+      # Get notification type settings
+      if [ "$useIcons" == "1" ]; then itemIcon="nIcon_$notificationType"; itemIcon=${!itemIcon}; fi
+      itemText="nText_$notificationType"; itemText=${!itemText}
+      itemType="nType_$notificationType"; itemType=${!itemType}
 
-    # Get notification type settings
-    if [ "$useIcons" == "1" ]; then itemIcon="nIcon_$notificationType"; itemIcon=${!itemIcon}; fi
-    itemText="nText_$notificationType"; itemText=${!itemText}
-    itemType="nType_$notificationType"; itemType=${!itemType}
+      # Start the link
+      itemLink="$nLink"
 
-    # Start the link
-    itemLink="$nLink"
+      # Deal with different notification types
+      case $itemType in
+        # Cards
+        "c")
+          shortLink=$(echo "$this" | jq -r '.data.card.shortLink')
+          itemLink="$itemLink/c/$shortLink"
 
-    # Deal with different notification types
-    case $itemType in
-      # Cards
-      "c")
-        shortLink=$(echo "$this" | jq -r '.data.card.shortLink')
-        itemLink="$itemLink/c/$shortLink"
+          cardName=$(echo "$this" | jq -r '.data.card.name')
+          itemText="${itemText//%card%/$cardName}"
+        ;;
 
-        cardName=$(echo "$this" | jq -r '.data.card.name')
-        itemText="${itemText//%card%/$cardName}"
-      ;;
+        # Boards
+        "b")
+          shortLink=$(echo "$this" | jq -r '.data.board.shortLink')
+          itemLink="$itemLink/b/$shortLink"
 
-      # Boards
-      "b")
-        shortLink=$(echo "$this" | jq -r '.data.board.shortLink')
-        itemLink="$itemLink/b/$shortLink"
+          boardName=$(echo "$this" | jq -r '.data.board.name')
+          itemText="${itemText//%board%/$boardName}"
+        ;;
 
-        boardName=$(echo "$this" | jq -r '.data.board.name')
-        itemText="${itemText//%board%/$boardName}"
-      ;;
+        # Organizations
+        "o")
+          orgId=$(echo "$this" | jq -r '.data.organization.id')
+          itemLink="$itemLink/$orgId"
 
-      # Organizations
-      "o")
-        orgId=$(echo "$this" | jq -r '.data.organization.id')
-        itemLink="$itemLink/$orgId"
+          orgName=$(echo "$this" | jq -r '.data.organization.name')
+          itemText="${itemText//%organization%/$orgName}"
+        ;;
+      esac
 
-        orgName=$(echo "$this" | jq -r '.data.organization.name')
-        itemText="${itemText//%organization%/$orgName}"
-      ;;
-    esac
+      # Name replace
+      memberName=$(echo "$this" | jq -r -c ".memberCreator.fullName")
+      if [ "$memberName" ]; then
+        itemText="${itemText//%name%/$memberName}"
+      fi
 
-    # Name replace
-    memberName=$(echo "$this" | jq -r -c ".memberCreator.fullName")
-    if [ "$memberName" ]; then
-      itemText="${itemText//%name%/$memberName}"
-    fi
+      # Only set item properties if we're in BitBar
+      if [ "${BitBar}" ]; then
+        # Item properties
+        itemProperties=" | href="$itemLink
 
-    # Only set item properties if we're in BitBar
+        # Colors and fonts
+        itemUnreadStatus=$(echo "$this" | jq -r '.unread')
+        if [ "$itemUnreadStatus" == true ]; then
+          color=$unreadColor
+          font=$unreadFont
+          size=$unreadSize
+        else
+          color=$readColor
+          font=$readFont
+          size=$readSize
+        fi
+
+        if [ "$color" ]; then itemProperties="$itemProperties color="$color; fi
+        if [ "$font" ]; then itemProperties="$itemProperties font="$font; fi
+        if [ "$size" ]; then itemProperties="$itemProperties size="$size; fi
+      fi
+
+      # Add a space after icon if there is one
+      if [ "$itemIcon" ]; then itemIcon="$itemIcon "; fi
+
+      # Truncate the item text
+      if [ "$truncLength" ]; then
+        if [ "${#itemText}" -gt "$truncLength" ]; then
+          itemText="${itemText:0:$truncLength-${#truncSuffix}}$truncSuffix"
+        fi
+      fi
+
+      # Print it
+      echo "$itemIcon$itemText$itemProperties"
+
+      # Break out if we hit our limit
+      if [[ $x == $((limit-1)) ]]; then break; fi
+
+      # Increment x
+      ((x+=1))
+    done
+
     if [ "${BitBar}" ]; then
-      # Item properties
-      itemProperties=" | href="$itemLink
-
-      # Colors and fonts
-      itemUnreadStatus=$(echo "$this" | jq -r '.unread')
-      if [ "$itemUnreadStatus" == true ]; then
-        color=$unreadColor
-        font=$unreadFont
-        size=$unreadSize
-      else
-        color=$readColor
-        font=$readFont
-        size=$readSize
-      fi
-
-      if [ "$color" ]; then itemProperties="$itemProperties color="$color; fi
-      if [ "$font" ]; then itemProperties="$itemProperties font="$font; fi
-      if [ "$size" ]; then itemProperties="$itemProperties size="$size; fi
+      echo "---"
+      echo "Mark All Notifications As Read | bash='$0' param1=markRead refresh=true terminal=false"
     fi
-
-    # Add a space after icon if there is one
-    if [ "$itemIcon" ]; then itemIcon="$itemIcon "; fi
-
-    # Truncate the item text
-    if [ "$truncLength" ]; then
-      if [ "${#itemText}" -gt "$truncLength" ]; then
-        itemText="${itemText:0:$truncLength-${#truncSuffix}}$truncSuffix"
-      fi
-    fi
-
-    # Print it
-    echo "$itemIcon$itemText$itemProperties"
-
-    # Break out if we hit our limit
-    if [[ $x == $((limit-1)) ]]; then break; fi
-
-    # Increment x
-    ((x+=1))
-  done
+  else
+    # No notifications were found
+    echo "🙈 no notifications found"
+  fi
 fi
