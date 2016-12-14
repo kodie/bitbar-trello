@@ -194,8 +194,8 @@ createConfigFile="1"              # Create the config file if one is not found (
 ###
 
 # Check if there's a config file
-if [ -e "$configFile" ];
-  then . "$configFile"
+if [ -e "$configFile" ]; then
+  . "$configFile"
 elif [ "$createConfigFile" == "1" ]; then
   printf "# To get your Trello API Key and Token, go to https://trello.com/app-key\napiKey=\"%s\"\napiToken=\"%s\"" "$apiKey" "$apiToken" > "$configFile"
 fi
